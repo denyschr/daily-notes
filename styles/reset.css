@@ -13,7 +13,7 @@
 
 html,
 body {
-  overflow-x: hidden;
+  height: 100%;
 }
 
 html {
@@ -23,7 +23,8 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
 
 h1,
@@ -88,6 +89,10 @@ textarea,
 select,
 button {
   color: inherit;
+}
+
+label {
+  display: inline-block;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
