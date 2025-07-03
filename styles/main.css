@@ -237,7 +237,7 @@ textarea {
   color: var(--text-color);
 }
 
-.note-text {
+.note-description {
   max-height: 25rem;
   margin-block-end: 1rem;
   padding-inline-end: 0.625rem;
@@ -298,4 +298,7 @@ textarea {
   display: grid;
   row-gap: 1.5rem;
   margin-block-end: 1.5rem;
+  textarea.form-control {
+    max-height: 16rem;
+  }
 }

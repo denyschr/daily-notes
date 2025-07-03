@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Daily Notes</title>
     <link rel="stylesheet" href="styles/main.css" />
-    <script src="modules/main.js" type="module"></script>
+    <script src="modules/main.js" defer></script>
   </head>
   <body>
     <div class="wrapper">
       <header class="topbar">
         <h1>Daily Notes</h1>
         <div class="topbar-actions">
-          <button class="button button-primary" type="button">
+          <button
+            class="button button-primary"
+            type="button"
+            data-add-note-button
+          >
             + Add Note
           </button>
           <button
@@ -26,24 +30,25 @@
       </header>
 
       <main class="page-content">
-        <div class="notes"></div>
+        <div class="notes" data-notes-container></div>
       </main>
 
-      <dialog class="dialog">
+      <dialog class="dialog" data-dialog>
         <div class="dialog-content">
           <div class="dialog-header">
-            <h2>Add New Note</h2>
+            <h2 data-dialog-title>Add New Note</h2>
             <button
               class="button-close"
               type="button"
               aria-label="Close dialog"
+              data-dialog-close-button
             >
               <svg width="14" height="14" aria-hidden="true">
                 <use href="assets/icons.svg#close"></use>
               </svg>
             </button>
           </div>
-          <form class="note-form">
+          <form id="note-form" class="note-form" data-note-form>
             <div class="form-group">
               <label class="form-label" for="title">Title</label>
               <input
@@ -51,6 +56,7 @@
                 class="form-control"
                 name="title"
                 type="text"
+                autofocus
                 placeholder="Enter note title..."
                 required
               />
@@ -62,15 +68,22 @@
                 class="form-control"
                 name="description"
                 placeholder="Write your note here..."
-                required
               ></textarea>
             </div>
           </form>
           <div class="dialog-footer">
-            <button class="button button-primary" type="submit">
-              Save Note
+            <button
+              class="button button-primary"
+              form="note-form"
+              type="submit"
+            >
+              Save
             </button>
-            <button class="button button-secondary" type="button">
+            <button
+              class="button button-secondary"
+              type="button"
+              data-cancel-note-button
+            >
               Cancel
             </button>
           </div>
