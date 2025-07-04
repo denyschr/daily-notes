@@ -142,6 +142,10 @@ label {
 /* Variables */
 
 :root {
+  --font-family-base: "Poppins", sans-serif;
+}
+
+:root[data-theme="light"] {
   --brand-color: #8b90ff;
   --base-color: #f2f4f8;
   --surface-color: #ffffff;
@@ -151,11 +155,9 @@ label {
   --base-transparent-100: rgba(247, 247, 247, 1);
   --success: #198754;
   --danger: #dc3545;
-
-  --font-family-base: "Poppins", sans-serif;
 }
 
-.dark-theme {
+:root[data-theme="dark"] {
   --brand-color: #8b90ff;
   --base-color: #1e1f26;
   --surface-color: #2c2f38;
@@ -163,6 +165,8 @@ label {
   --secondary-text-color: #b0b3c0;
   --base-transparent-90: rgba(30, 31, 38, 0.9);
   --base-transparent-100: rgba(30, 31, 38, 1);
+  --success: #198754;
+  --danger: #dc3545;
 }
 
 /* Global */
@@ -319,6 +323,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1.25rem;
   margin-block-end: 2rem;
 }

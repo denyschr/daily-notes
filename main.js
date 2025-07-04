@@ -1,6 +1,10 @@
-"use strict";
-
 (() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const toggleThemeButton = document.querySelector(
+    "[data-toggle-theme-button]"
+  );
   const dialog = document.querySelector("[data-dialog]");
   const dialogCloseButton = document.querySelector(
     "[data-dialog-close-button]"
@@ -13,14 +17,37 @@
   let notes = [];
   let editingNoteId = null;
 
+  const getPreferredTheme = () => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      return storedTheme;
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+
+  const setTheme = (theme) => {
+    root.setAttribute("data-theme", theme);
+    toggleThemeButton.setAttribute("aria-label", `Toggle theme (${theme})`);
+    toggleThemeButton.textContent = theme === "light" ? "🌙" : "☀️";
+  };
+
+  const toggleTheme = () => {
+    const dataTheme = root.getAttribute("data-theme");
+    const newTheme = dataTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  const loadNotes = () => JSON.parse(localStorage.getItem("notes") ?? "[]");
+  const saveNotes = () => localStorage.setItem("notes", JSON.stringify(notes));
+
   const escapeHtml = (text) => {
     const div = document.createElement("div");
     div.textContent = text;
     return div.innerHTML;
   };
-
-  const loadNotes = () => JSON.parse(localStorage.getItem("notes") ?? "[]");
-  const saveNotes = () => localStorage.setItem("notes", JSON.stringify(notes));
 
   const renderNotes = () => {
     if (notes.length === 0) {
@@ -165,10 +192,12 @@
     closeDialog();
   });
 
+  toggleThemeButton.addEventListener("click", toggleTheme);
   addNoteButton.addEventListener("click", openDialog);
   cancelNoteButton.addEventListener("click", closeDialog);
   dialogCloseButton.addEventListener("click", closeDialog);
 
+  setTheme(getPreferredTheme());
   notes = loadNotes();
   renderNotes();
 })();
