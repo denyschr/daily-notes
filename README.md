@@ -1,3 +1,3 @@
 # Daily Notes
 
-[Live demo](denyschr.github.io/daily-notes/)
+[Live demo](https://denyschr.github.io/daily-notes/)
